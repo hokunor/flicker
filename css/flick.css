@@ -1,7 +1,6 @@
 #container {
     max-width: 1000px;
     width: 800px;
-    min-width: 300px;
     margin: 0 auto;
 
 }
@@ -18,4 +17,5 @@
 #container img {
     padding: 2px;
     vertical-align: top;
+    margin: 20px;
 }

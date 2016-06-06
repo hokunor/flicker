@@ -3,14 +3,14 @@
     if (typeof(window.app) === 'undefined') {
         window.app = {};
     }
-    var date_hand = function () {
+    var dateHand = function () {
         this.monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     };
-    date_hand.prototype.format = function (data) {
-        var date_stamp = new Date(data),
-            hour = date_stamp.getHours(),
-            minute = date_stamp.getMinutes(),
-            date_parsed;
+    dateHand.prototype.format = function (data) {
+        var dateStamp = new Date(data),
+            hour = dateStamp.getHours(),
+            minute = dateStamp.getMinutes(),
+            dateParsed;
         if (hour < 10) {
             hour = '0' + hour;
         }
@@ -18,13 +18,13 @@
             minute = '0' + minute;
         }
 
-        date_parsed = hour + ':' +
+        dateParsed = hour + ':' +
              minute + ' ' +
-             date_stamp.getDate() + '-' +
-             this.monthNames[date_stamp.getMonth() - 1] + '-' +
-             date_stamp.getFullYear();
+             dateStamp.getDate() + '-' +
+             this.monthNames[dateStamp.getMonth() - 1] + '-' +
+             dateStamp.getFullYear();
 
-        return date_parsed;
+        return dateParsed;
     };
-    app.date = new date_hand();
+    app.date = new dateHand();
 })();

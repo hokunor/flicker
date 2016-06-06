@@ -29,17 +29,17 @@
             }
         }
         xhr.open(method, url, true);
-        if (params.response_type) {
-            xhr.responseType = params.response_type;
+        if (params.responseType) {
+            xhr.responseType = params.responseType;
         } else {
-            params.response_type = 'json';
+            params.responseType = 'json';
             xhr.responseType = 'json';
         }
         xhr.onload = function (event) {
             var response;
-            if (params.response_type !== 'null') {
+            if (params.responseType !== 'null') {
                 if (this.status === 200 || this.status === 304) {
-                    if (params.response_type === 'json') {
+                    if (params.responseType === 'json') {
                         response = JSON.parse(this.response);
                         if (response.status === 'ok') {
                             _done(response);
@@ -48,7 +48,7 @@
                             _error(response);
                         }
                     }
-                    else if (params.response_type === 'xml') {
+                    else if (params.responseType === 'xml') {
                         response = this.responseXML;
                         if (response) {
                             _done(response);

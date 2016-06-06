@@ -1,22 +1,22 @@
 (function () {
     "use strict";
-    var error_handler;
-    if (typeof(window.app) === 'undefined') {
-        window.app = {};
+    var errorHandler;
+    if (typeof(window.App) === 'undefined') {
+        window.App = {};
     }
-    error_handler = function () {
-        this.send_to_service = function (data) {
-            var params = {data: data, response_type: 'null'};
+    errorHandler = function () {
+        this.sendToService = function (data) {
+            var params = {data: data, responseType: 'null'};
             console.log(data);
-            app.ajax('/error-log.html', params).done(function () {
+            App.ajax('/error-log.html', params).done(function () {
             });
         };
     };
 
-    error_handler.prototype.standard = function (data) {
-        this.send_to_service(data);
+    errorHandler.prototype.standard = function (data) {
+        this.sendToService(data);
     };
 
-    app.error = new error_handler();
+    App.error = new errorHandler();
 
 })();

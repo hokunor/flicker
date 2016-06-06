@@ -6,17 +6,17 @@
     }
     app.moduleLoader = function () {
         var that = this;
-        this.head_node = document.getElementsByTagName('head')[0];
+        this.headNode = document.getElementsByTagName('head')[0];
         this.styles = [];
         this.modules = [];
-        this.loading_modules = [];
+        this.loadingModules = [];
         this.temp = [];
-        this.temp_count = 0;
+        this.tempCount = 0;
 
         this.loadingJs = function (name, callback) {
             var jsNode = document.createElement('script');
             jsNode.setAttribute('type', 'text/javascript');
-            jsNode.setAttribute('src', window.location.protocol + '//' + this.static_domain + '/js/' + name + this.static_js_version + '.js');
+            jsNode.setAttribute('src', window.location.protocol + '//' + this.staticDomain + '/js/' + name + this.staticJsVersion + '.js');
             jsNode.async = true;
 
             jsNode.onload = function () {
@@ -28,47 +28,51 @@
             };
             that.temp.slice(name, 1);
             delete that.temp[name];
-            this.head_node.appendChild(jsNode);
+            this.headNode.appendChild(jsNode);
         };
         this.loaded = function (that, name, callback) {
-            that.temp_count -= 1;
+            that.tempCount -= 1;
             that.modules[name] = {};
-            if (that.temp_count === 0) {
+            if (that.tempCount === 0) {
                 that.temp = [];
                 callback();
             }
         };
     };
 
-    app.moduleLoader.prototype.static_domain = 'localhost';
-    app.moduleLoader.prototype.static_js_version = '';
-    app.moduleLoader.prototype.static_css_version = '';
+    app.moduleLoader.prototype.staticDomain = 'localhost';
+    app.moduleLoader.prototype.staticJsVersion = '';
+    app.moduleLoader.prototype.staticCssVersion = '';
 
     app.moduleLoader.prototype.loadCss = function (name) {
         var cssNode = document.createElement('link');
         cssNode.setAttribute('type', 'text/css');
         cssNode.setAttribute('rel', 'stylesheet');
-        cssNode.setAttribute('href', window.location.protocol + '//' + this.static_domain + '/css/' + name +
-            this.static_css_version + '.css');
-        this.head_node.appendChild(cssNode);
+        cssNode.setAttribute('href', window.location.protocol + '//' + this.staticDomain + '/css/' + name +
+            this.staticCssVersion + '.css');
+        this.headNode.appendChild(cssNode);
     };
 
-    app.moduleLoader.prototype.loadJs = function (load_modules, callback) {
-        for (var key in load_modules) {
-            if (this.modules[load_modules[key]]) {
-                load_modules.splice(key, 1);
+    app.moduleLoader.prototype.loadJs = function (loadModules, callback) {
+        for (var key in loadModules) {
+            if (loadModules.hasOwnProperty(key)) {
+                if (this.modules[loadModules[key]]) {
+                    loadModules.splice(key, 1);
 
-            }
-            else {
-                this.temp[load_modules[key]] = {};
-                ++this.temp_count;
+                }
+                else {
+                    this.temp[loadModules[key]] = {};
+                    ++this.tempCount;
+                }
             }
         }
         ;
 
-        if (this.temp_count) {
+        if (this.tempCount) {
             for (var mod in this.temp) {
-                this.loadingJs(mod, callback);
+                if (this.temp.hasOwnProperty(mod)) {
+                    this.loadingJs(mod, callback);
+                }
             }
         }
         else {

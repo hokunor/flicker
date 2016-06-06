@@ -1,0 +1,4 @@
+support for:
+ chrome latest
+ firefox latest
+ Internet Explorer 11(for older ones missing "dataset" workaround)

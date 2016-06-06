@@ -1,4 +1,4 @@
-(function (window, document ) {
+(function (window, document) {
     "use strict";
     var flick;
     if (window.app === undefined) {
@@ -15,13 +15,11 @@
 
         this.container = document.querySelector('#container');
     };
-
     flick.prototype.jsoncallback = function (data) {
         this.data = data;
         this.build();
         this.bind();
     };
-
     flick.prototype.bind = function () {
         var images = this.container.querySelectorAll('#container img'),
             clickEvent = function (e) {
@@ -33,15 +31,8 @@
                     localStorage.setItem(target.dataset.id, "");
                 }
                 target.classList.toggle("selected");
-
-
-            },
-            unloading = function () {
-                var imagesSelected = this.container.querySelectorAll('#container img.selected');
-                for (var i = 0; i < imagesSelected.length; i++) {
-                    // imagesSelected[i].dataset.id
-                }
             };
+
         for (var i = 0; i < images.length; i++) {
             images[i].addEventListener("click", function (e) {
                 clickEvent(e);
@@ -49,23 +40,21 @@
         }
     };
     flick.prototype.build = function () {
-        var item,
+        var item, itemImg,
             box = document.createElement('div');
         if (this.data !== undefined && this.data.items !== undefined) {
 
             for (item in  this.data.items) {
-                var itemImg;
-
                 if (this.data.items.hasOwnProperty(item)) {
                     itemImg = document.createElement('img');
                     itemImg.src = this.data.items[item].media.m;
                     var tempArray = this.data.items[item].link.split("/");
                     itemImg.dataset.id = tempArray[tempArray.length - 2];
-                    if(localStorage.getItem(tempArray[tempArray.length - 2]) !== null){
+                    if (localStorage.getItem(tempArray[tempArray.length - 2]) !== null) {
                         itemImg.classList.add("selected");
                     }
+                    box.appendChild(itemImg);
                 }
-                box.appendChild(itemImg);
             }
             this.container.appendChild(box);
         }
