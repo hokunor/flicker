@@ -1,0 +1,21 @@
+#container {
+    max-width: 1000px;
+    width: 800px;
+    min-width: 300px;
+    margin: 0 auto;
+
+}
+#container div {
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+    text-align: center;
+}
+#container img.selected {
+    border: 2px dashed #ccc;
+    padding:0;
+}
+#container img {
+    padding: 2px;
+    vertical-align: top;
+}
