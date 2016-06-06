@@ -40,7 +40,7 @@
         };
     };
 
-    app.moduleLoader.prototype.staticDomain = 'localhost';
+    app.moduleLoader.prototype.staticDomain = window.location.host;
     app.moduleLoader.prototype.staticJsVersion = '';
     app.moduleLoader.prototype.staticCssVersion = '';
 
